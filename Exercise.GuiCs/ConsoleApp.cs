@@ -7,6 +7,7 @@ namespace Exercise.GuiCs
     {
         public ConsoleApp()
         {
+            Application.Init();
             var top = Application.Top;
 
             // Creates the top-level window to show
@@ -68,7 +69,7 @@ namespace Exercise.GuiCs
                     new Button(10, 14, "Cancel"),
                     new Label(3, 18, "Press F9 or ESC plus 9 to activate the menubar"));
 
-
+            Application.Run();
         }
     }
 }

@@ -1,11 +1,12 @@
 ﻿using NStack;
+using System;
 using Terminal.Gui;
 
 namespace Exercise.GuiCs
 {
-    public class ConsoleApp : Toplevel
+    public class DefaultDemoApp : Toplevel
     {
-        public ConsoleApp()
+        public DefaultDemoApp()
         {
             Application.Init();
             var top = Application.Top;
@@ -27,7 +28,7 @@ namespace Exercise.GuiCs
             new MenuBarItem ("_File", new MenuItem [] {
                 new MenuItem ("_New", "Creates new file", ()=>{ }),
                 new MenuItem ("_Close", "", ()=>{ }),
-                new MenuItem ("_Quit", "", () => {  top.Running = false; })
+                new MenuItem ("_Quit", "", () => {  top.Running = false; Environment.Exit(0); })
             }),
             new MenuBarItem ("_Edit", new MenuItem [] {
                 new MenuItem ("_Copy", "", null),

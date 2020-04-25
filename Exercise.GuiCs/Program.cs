@@ -7,7 +7,7 @@ namespace Exercise.GuiCs
     {
         static void Main(string[] args)
         {
-            Application.Run<ConsoleApp>();
+            Application.Run<PickerApp>();
         }
     }
 }

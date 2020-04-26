@@ -13,28 +13,30 @@ namespace Exercise.GuiCs
         public PickerApp()
         {
             _apps[0] = () => new DefaultDemoApp();
+            _apps[1] = () => new FileExplorerApp();
 
             Application.Init();
 
             var top = Application.Top;
 
             // Creates the top-level window to show
-            var win = new Window("MyApp")
+            var win = new Window("Picker")
             {
                 X = 0,
                 Y = 0,
                 Width = Dim.Fill(),
                 Height = Dim.Fill()
             };
+
             top.Add(win);
 
-            var options = new RadioGroup(1, 1, new[] { "Default demo", "Option2" });
+            var options = new RadioGroup(1, 1, new[] { "Default demo", "File explorer" });
 
             var confirm = new Button(1, 4, "OK")
             {
                 Clicked = () =>
                 {
-                    top.Running = false;
+                    //top.Running = false;
                     _apps[options.Selected].Invoke();
                 }
             };

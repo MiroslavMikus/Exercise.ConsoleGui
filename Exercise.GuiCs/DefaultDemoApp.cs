@@ -25,6 +25,7 @@ namespace Exercise.GuiCs
 
             // Creates a menubar, the item "New" has a help menu.
             var menu = new MenuBar(new MenuBarItem[] {
+
             new MenuBarItem ("_File", new MenuItem [] {
                 new MenuItem ("_New", "Creates new file", ()=>{ }),
                 new MenuItem ("_Close", "", ()=>{ }),
@@ -34,22 +35,26 @@ namespace Exercise.GuiCs
                 new MenuItem ("_Copy", "", null),
                 new MenuItem ("C_ut", "", null),
                 new MenuItem ("_Paste", "", null)
-            })
-        });
+                })
+            });
+
             top.Add(menu);
 
             var login = new Label("Login: ") { X = 3, Y = 2 };
+
             var password = new Label("Password: ")
             {
                 X = Pos.Left(login),
                 Y = Pos.Top(login) + 1
             };
+
             var loginText = new TextField("")
             {
                 X = Pos.Right(password),
                 Y = Pos.Top(login),
                 Width = 40
             };
+
             var passText = new TextField("")
             {
                 Secret = true,

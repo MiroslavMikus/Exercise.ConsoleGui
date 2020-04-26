@@ -1,18 +1,22 @@
-﻿using NStack;
-using System;
+﻿using System;
 using Terminal.Gui;
 
 namespace Exercise.GuiCs
 {
-    public class DefaultDemoApp : Toplevel
+    public class DefaultDemoApp : Toplevel, ITopHost
     {
-        public DefaultDemoApp()
+        public Toplevel Top()
         {
-            Application.Init();
-            var top = Application.Top;
+            var top = new Toplevel()
+            {
+                X = 0,
+                Y = 0,
+                Width = Dim.Fill(),
+                Height = Dim.Fill()
+            };
 
             // Creates the top-level window to show
-            var win = new Window("MyApp")
+            var win = new Window("The demo app")
             {
                 X = 0,
                 Y = 1, // Leave one row for the toplevel menu
@@ -29,7 +33,7 @@ namespace Exercise.GuiCs
             new MenuBarItem ("_File", new MenuItem [] {
                 new MenuItem ("_New", "Creates new file", ()=>{ }),
                 new MenuItem ("_Close", "", ()=>{ }),
-                new MenuItem ("_Quit", "", () => {  top.Running = false; Environment.Exit(0); })
+                new MenuItem ("_Quit", "", Program.Start)
             }),
             new MenuBarItem ("_Edit", new MenuItem [] {
                 new MenuItem ("_Copy", "", null),
@@ -75,7 +79,7 @@ namespace Exercise.GuiCs
                     new Button(10, 14, "Cancel"),
                     new Label(3, 18, "Press F9 or ESC plus 9 to activate the menubar"));
 
-            Application.Run();
+            return top;
         }
     }
 }

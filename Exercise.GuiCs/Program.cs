@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using Terminal.Gui;
 
 namespace Exercise.GuiCs
@@ -7,7 +8,9 @@ namespace Exercise.GuiCs
     {
         static void Main(string[] args)
         {
-            Application.Run<PickerApp>();
+            Start();
         }
+
+        public static void Start() => Application.Run<PickerApp>();
     }
 }

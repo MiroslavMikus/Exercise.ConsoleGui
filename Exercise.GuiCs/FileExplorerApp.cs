@@ -1,15 +1,22 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using Terminal.Gui;
 
 namespace Exercise.GuiCs
 {
-    public class FileExplorerApp : Toplevel
+    public class FileExplorerApp : Toplevel, ITopHost
     {
-        public FileExplorerApp()
+        public Toplevel Top()
         {
-            Application.Init();
-
-            var top = Application.Top;
+            var top = new Toplevel()
+            {
+                X = 0,
+                Y = 0,
+                Width = Dim.Fill(),
+                Height = Dim.Fill()
+            };
 
             var win = new Window("File explorer")
             {
@@ -19,6 +26,25 @@ namespace Exercise.GuiCs
                 Height = Dim.Percent(90)
             };
 
+            var scroll = new ScrollView(win.Frame);
+
+            List<string> data = Enumerable.Range(0, 200).Select(a => Guid.NewGuid().ToString()).ToList();
+
+            var list = new ListView(data);
+
+            scroll.Add(list);
+
+            win.Add(scroll);
+
+            var operations = CreateOperationsView(top, win);
+
+            top.Add(win, operations);
+
+            return top;
+        }
+
+        private Window CreateOperationsView(Toplevel top, Window win)
+        {
             var operations = new Window("Actions")
             {
                 X = 0,
@@ -29,11 +55,7 @@ namespace Exercise.GuiCs
 
             var quit = new Button(1, 0, "Quit")
             {
-                Clicked = () =>
-                {
-                    top.Running = false;
-                    Environment.Exit(0);
-                }
+                Clicked = Program.Start
             };
 
             var msg = new Button("Show file explorer position")
@@ -50,11 +72,7 @@ namespace Exercise.GuiCs
 
             operations.Add(quit);
             operations.Add(msg);
-
-            top.Add(win);
-            top.Add(operations);
-
-            Application.Run();
+            return operations;
         }
     }
 }

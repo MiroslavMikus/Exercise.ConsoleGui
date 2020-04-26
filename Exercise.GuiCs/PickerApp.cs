@@ -8,12 +8,12 @@ namespace Exercise.GuiCs
 {
     public class PickerApp : Toplevel
     {
-        private readonly Dictionary<int, Action> _apps = new Dictionary<int, Action>();
+        private readonly Dictionary<int, ITopHost> _apps = new Dictionary<int, ITopHost>();
 
         public PickerApp()
         {
-            _apps[0] = () => new DefaultDemoApp();
-            _apps[1] = () => new FileExplorerApp();
+            _apps[0] = new DefaultDemoApp();
+            _apps[1] = new FileExplorerApp();
 
             Application.Init();
 
@@ -36,8 +36,7 @@ namespace Exercise.GuiCs
             {
                 Clicked = () =>
                 {
-                    //top.Running = false;
-                    _apps[options.Selected].Invoke();
+                    Application.Run(_apps[options.Selected].Top());
                 }
             };
 

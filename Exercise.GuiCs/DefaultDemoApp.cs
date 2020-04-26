@@ -3,8 +3,10 @@ using Terminal.Gui;
 
 namespace Exercise.GuiCs
 {
-    public class DefaultDemoApp : Toplevel, ITopHost
+    public class DefaultDemoApp : ITopHost
     {
+        public string Name => "The demo app";
+
         public Toplevel Top()
         {
             var top = new Toplevel()
@@ -16,7 +18,7 @@ namespace Exercise.GuiCs
             };
 
             // Creates the top-level window to show
-            var win = new Window("The demo app")
+            var win = new Window(Name)
             {
                 X = 0,
                 Y = 1, // Leave one row for the toplevel menu

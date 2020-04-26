@@ -6,8 +6,10 @@ using Terminal.Gui;
 
 namespace Exercise.GuiCs
 {
-    public class FileExplorerApp : Toplevel, ITopHost
+    public class FileExplorerApp : ITopHost
     {
+        public string Name => "File explorer";
+
         public Toplevel Top()
         {
             var top = new Toplevel()
@@ -18,7 +20,7 @@ namespace Exercise.GuiCs
                 Height = Dim.Fill()
             };
 
-            var win = new Window("File explorer")
+            var win = new Window(Name)
             {
                 X = 0,
                 Y = 0,
